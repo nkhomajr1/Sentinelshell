@@ -1,0 +1,72 @@
+SentinelShell is a command-line antivirus tool—streamlined for Windows and Termux—that scans, quarantines, and restores potentially malicious files using SHA-256 signature detection. Here’s how to wield it like a pro:
+
+---
+
+### 🔍 Basic Scan
+
+To scan a directory without making changes:
+
+```bash
+python launcher.py C:/Path/To/Scan
+```
+
+In Termux:
+
+```bash
+python launcher.py /storage/emulated/0/Download
+```
+
+---
+
+### 🛡️ Quarantine Mode
+
+To scan and automatically isolate threats:
+
+```bash
+python launcher.py ./downloads --quarantine
+```
+
+Detected malware is moved to the `quarantine/` folder and logged in `quarantine_log.json`.
+
+---
+
+### ♻️ Restore a File
+
+If you want to bring back a file that was falsely flagged:
+
+```bash
+python launcher.py --restore filename.exe
+```
+
+It will locate the original path from the log and move the file back.
+
+---
+
+### 🎧 Optional: Voice & Visual Vibe
+
+- Add a custom `.wav` file at `assets/sentinel_greeting.wav`  
+- Terminal will play the greeting and display Matrix-style splash on launch
+
+---
+
+### 🔐 Custom Malware Signatures
+
+Edit `signatures/malware_db.json` and add SHA-256 hashes like:
+
+```json
+{
+  "abc123...": "Trojan.Agent-Raw",
+  "def456...": "Worm.ZeroCool"
+}
+```
+
+You can generate a hash of any file like this:
+
+```bash
+python -c "import hashlib; print(hashlib.sha256(open('file.exe','rb').read()).hexdigest())"
+```
+
+---
+
+Need help customizing a signature updater or building a GUI on top? I can help you level it up in any direction you want. SentinelShell is your framework—let’s weaponize it wisely. 🟢🛡️💻  
+Want a cheat sheet or command summary banner next? I’ve got one locked and loaded.
