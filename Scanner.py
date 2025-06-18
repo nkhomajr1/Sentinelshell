@@ -1,0 +1,55 @@
+import hashlib, os, shutil, json
+from datetime import datetime
+
+SIGNATURE_DB = "signatures/malware_db.json"
+QUARANTINE_DIR = "quarantine"
+LOG_FILE = "quarantine_log.json"
+
+def load_signatures():
+    try:
+        with open(SIGNATURE_DB, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+def hash_file(path):
+    try:
+        with open(path, "rb") as f:
+            return hashlib.sha256(f.read()).hexdigest()
+    except:
+        return None
+
+def log_threat(file_path, malware_name):
+    entry = {
+        "timestamp": datetime.now().isoformat(),
+        "file": file_path,
+        "malware": malware_name
+    }
+    try:
+        with open(LOG_FILE, "r") as f:
+            data = json.load(f)
+    except:
+        data = []
+    data.append(entry)
+    with open(LOG_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+
+def quarantine_file(path):
+    os.makedirs(QUARANTINE_DIR, exist_ok=True)
+    dest = os.path.join(QUARANTINE_DIR, os.path.basename(path))
+    shutil.move(path, dest)
+    return dest
+
+def scan_directory(directory, quarantine=False):
+    signatures = load_signatures()
+    for root, _, files in os.walk(directory):
+        for name in files:
+            full_path = os.path.join(root, name)
+            file_hash = hash_file(full_path)
+            if file_hash in signatures:
+                print(f"[!] Threat: {name} → {signatures[file_hash]}")
+                log_threat(full_path, signatures[file_hash])
+                if quarantine:
+                    quarantine_file(full_path)
+            else:
+                print(f"[OK] {name}")
