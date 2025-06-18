@@ -1,0 +1,27 @@
+# Bytecode and cache
+__pycache__/
+*.pyc
+
+# Build artifacts
+build/
+dist/
+*.spec
+
+# Executables
+*.exe
+*.tar.gz
+*.zip
+
+# Logs and runtime files
+*.log
+quarantine_log.json
+
+# Quarantine and sensitive keys
+quarantine/
+core/.sentinel_key
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
