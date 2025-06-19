@@ -52,4 +52,4 @@ def scan_directory(directory, quarantine=False):
                 if quarantine:
                     quarantine_file(full_path)
             else:
-                print(f"[OK] {name}")
+                print(f"[OK] {name}") 
