@@ -1,5 +1,7 @@
 # launcher.py
 import argparse
+import sys
+print(sys.path)
 from core import scanner
 from core.restorer import restore_file
 from utils.theme import enable_ansi, banner
@@ -35,4 +37,3 @@ def main():
 
 if __name__ == "__main__":
     main()
- 
