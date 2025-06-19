@@ -1,22 +1,22 @@
-# launcher.py
 import argparse
-import sys
-print(sys.path)
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
 from core import scanner
 from core.restorer import restore_file
 from utils.theme import enable_ansi, banner
 from utils.rain import matrix_rain
-from playsound import playsound  # Optional: for voice greeting
+from playsound import playsound
 
 def voice_greeting():
     try:
         playsound("assets/sentinel_greeting.wav")
     except:
-        pass  # Fail silently if audio is missing
+        pass  # Silent fail if audio missing
 
 def main():
     parser = argparse.ArgumentParser(description="SentinelShell Antivirus")
-    parser.add_argument("target", nargs="?", default=None, help="Path to scan")
+    parser.add_argument("target", nargs="?", default=None, help="Directory or file to scan")
     parser.add_argument("--quarantine", action="store_true", help="Quarantine detected threats")
     parser.add_argument("--restore", type=str, help="Restore a quarantined file")
     args = parser.parse_args()
@@ -31,9 +31,7 @@ def main():
     elif args.target:
         scanner.scan_directory(args.target, quarantine=args.quarantine)
     else:
-        print("Usage:")
-        print("  python launcher.py <path> [--quarantine]")
-        print("  python launcher.py --restore <filename>")
+        parser.print_help()
 
 if __name__ == "__main__":
     main()
