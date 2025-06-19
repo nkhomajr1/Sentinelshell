@@ -26,3 +26,4 @@ def log_quarantine(file_path, malware_name):
 
     with open(LOG_FILE, "w") as f:
         json.dump(data, f, indent=2)
+ 
