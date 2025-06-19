@@ -9,4 +9,4 @@ git branch -M main
 git push -u origin main
 
 echo "[✔] SentinelShell is now live at:"
-echo "https://github.com/nkhoma1/SentinelShell"
+echo "https://github.com/nkhoma1/SentinelShell" 
