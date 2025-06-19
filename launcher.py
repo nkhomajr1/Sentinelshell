@@ -3,7 +3,7 @@ import sys, os
 print("sys.path at start:", sys.path)
 print("Current working directory:", is.getcwd())
 from core import scanner
-scanner.scan_directory("test-folder")
+scanner.scan_directory("main")
 from core.restorer import restore_file
 from utils.theme import enable_ansi, banner
 from utils.rain import matrix_rain
