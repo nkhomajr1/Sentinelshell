@@ -1,7 +1,7 @@
 import argparse
 import sys, os
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-
+print("sys.path at start:", sys.path)
+print("Current working directory:", is.getcwd())
 from core import scanner
 from core.restorer import restore_file
 from utils.theme import enable_ansi, banner
