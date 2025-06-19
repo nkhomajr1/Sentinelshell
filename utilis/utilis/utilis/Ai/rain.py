@@ -12,3 +12,4 @@ def matrix_rain(duration=3):
     while time.time() < end_time:
         line = "".join(random.choice(chars) for _ in range(columns))
         print
+ 
