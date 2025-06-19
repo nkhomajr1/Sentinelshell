@@ -2,7 +2,7 @@ import argparse
 import sys, os
 print("sys.path at start:", sys.path)
 print("Current working directory:", os.getcwd())
-from core import scanner
+import scanner from core
 scanner.scan_directory("main()")
 from core.restorer import restore_file
 from utils.theme import enable_ansi, banner
