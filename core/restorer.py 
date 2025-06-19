@@ -1,0 +1,47 @@
+import os
+import shutil
+import json
+
+QUARANTINE_DIR = "quarantine"
+LOG_FILE = "quarantine_log.json"
+
+def load_quarantine_log():
+    try:
+        with open(LOG_FILE, "r") as f:
+            return json.load(f)
+    except:
+        return []
+
+def save_quarantine_log(data):
+    with open(LOG_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+
+def restore_file(filename, destination):
+    src = os.path.join(QUARANTINE_DIR, filename)
+    if not os.path.exists(src):
+        print(f"[X] File {filename} not found in quarantine.")
+        return False
+
+    os.makedirs(os.path.dirname(destination), exist_ok=True)
+    shutil.move(src, destination)
+    print(f"[+] Restored {filename} to {destination}")
+    return True
+
+def restore_from_log(filename):
+    log = load_quarantine_log()
+    for entry in log:
+        if os.path.basename(entry.get("file", "")) == filename:
+            original_path = entry.get("file")
+            if restore_file(filename, original_path):
+                # Remove the entry from the log
+                log.remove(entry)
+                save_quarantine_log(log)
+            return
+    print(f"[X] No log entry found for {filename}")
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: python -m core.restorer <filename>")
+    else:
+        restore_from_log(sys.argv[1])
