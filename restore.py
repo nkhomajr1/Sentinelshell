@@ -29,4 +29,4 @@ def restore_file(filename):
 
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     shutil.move(src, dest)
-    print(f"✅ Restored: {filename} → {dest}") 
+    print(f"✅ Restored: {filename} → {dest}")
