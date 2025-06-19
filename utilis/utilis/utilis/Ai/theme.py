@@ -6,7 +6,7 @@ def enable_ansi():
     if platform.system() == "Windows":
         os.system("")
 
-def banner():
+def banner(): 
     return r"""
    ███████╗███████╗███╗   ██╗████████╗██╗███╗   ██╗███████╗██╗     ██╗     
    ██╔════╝██╔════╝████╗  ██║╚══██╔══╝██║████╗  ██║██╔════╝██║     ██║     
