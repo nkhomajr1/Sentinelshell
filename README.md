@@ -22,4 +22,4 @@ Modular. Lightweight. Matrix-inspired. Runs on Windows CMD and Android Termux.
 
 ```bash
 pip install -r requirements.txt
-python launcher.py C:/Path/To/Scan --quarantine
+python launcher.py C:/Path/To/Scan --quarantine 
