@@ -70,3 +70,4 @@ python -c "import hashlib; print(hashlib.sha256(open('file.exe','rb').read()).he
 
 Need help customizing a signature updater or building a GUI on top? I can help you level it up in any direction you want. SentinelShell is your framework—let’s weaponize it wisely. 🟢🛡️💻  
 Want a cheat sheet or command summary banner next? I’ve got one locked and loaded.
+ 
